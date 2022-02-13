@@ -1,0 +1,219 @@
+.poke-container{
+    text-align: center;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.card{
+    width: 50%;
+    padding: 0 15px;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+.row.g-3{
+    text-align: center;
+    padding: 0 258px;
+    width: 50%   ;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Normal */
+.text-normal{
+    background: rgb(124, 124, 124);
+}
+/* Fighting */
+.text-fighting{
+    background: rgb(190, 125, 4);;
+}
+/* Flying */
+.text-flying{
+    background: linear-gradient(
+        to bottom,
+        rgb(76, 174, 240) 0%,
+        rgb(76, 174, 240) 50%,
+        rgb(151, 151, 151) 50%,
+        rgb(151, 151, 151) 100%
+        );
+}
+/* Poison */
+.text-poison{
+    background:rgb(158, 80, 247);
+}
+/* Ground */
+.text-ground{
+    background: linear-gradient(
+        to bottom,
+        rgb(180, 190, 27) 0%,
+        rgb(180, 190, 27) 50%,
+        rgb(177, 132, 49) 50%,
+        rgb(177, 132, 49) 100%);
+}
+/* Rock */
+.text-rock{
+    background: rgb(124, 93, 35);
+}
+/* Bug */
+.text-bug{
+    background: rgba(79, 165, 8, 0.904);
+}
+/* Ghost */
+.text-ghost{
+    background: rgb(121, 0, 168);
+}
+/* Steel */
+.text-steel{
+    background: rgb(159, 176, 187);
+}
+/* Fire */
+.text-fire{
+    background: rgb(238, 84, 13);
+}
+/* Water */
+.text-water{
+    background: rgba(38, 156, 211, 0.808);
+}
+/* Grass */
+.text-grass{
+    background: rgb(19, 211, 1);
+}
+/* Electric */
+.badge.rounded-pill.bg.text-electric{
+    background-color: rgb(228, 224, 0);
+    color: black;
+}
+/* Psychic */
+.text-psychic{
+    background: rgb(255, 70, 240);
+}
+/* Ice */
+.text-ice{
+    background: rgb(50, 221, 198);
+}
+/* Dragon */
+.text-dragon{
+    background: linear-gradient(
+        to bottom,
+        rgba(38, 156, 211, 0.808) 0%,
+        rgba(38, 156, 211, 0.808) 50%,
+        rgb(238, 84, 13) 50%,
+        rgb(238, 84, 13) 100%);
+}
+/* Dark */
+.text-dark{
+    background: rgb(38, 40, 41);
+}
+/* Fairy */
+.text-fairy{
+    background: rgb(252, 138, 237);
+}
+
+/* Normal */
+.text-normal{
+    background: rgb(124, 124, 124);
+}
+/* Fighting */
+.text-fighting{
+    background: rgb(190, 125, 4);;
+}
+/* Flying */
+.text-flying{
+    background: linear-gradient(
+        to bottom,
+        rgb(76, 174, 240) 0%,
+        rgb(76, 174, 240) 50%,
+        rgb(151, 151, 151) 50%,
+        rgb(151, 151, 151) 100%
+        );
+}
+/* Poison */
+.text-poison{
+    background:rgb(158, 80, 247);
+}
+/* Ground */
+.text-ground{
+    background: linear-gradient(
+        to bottom,
+        rgb(180, 190, 27) 0%,
+        rgb(180, 190, 27) 50%,
+        rgb(177, 132, 49) 50%,
+        rgb(177, 132, 49) 100%);
+}
+/* Rock */
+.text-rock{
+    background: rgb(124, 93, 35);
+}
+/* Bug */
+.text-bug{
+    background: rgba(79, 165, 8, 0.904);
+}
+/* Ghost */
+.text-ghost{
+    background: rgb(121, 0, 168);
+}
+/* Steel */
+.text-steel{
+    background: rgb(159, 176, 187);
+}
+/* Fire */
+.text-fire{
+    background: rgb(238, 84, 13);
+}
+/* Water */
+.text-water{
+    background: rgba(38, 156, 211, 0.808);
+}
+/* Grass */
+.text-grass{
+    background: rgb(19, 211, 1);
+}
+/* Electric */
+.badge.rounded-pill.bg.text-electric{
+    background-color: rgb(228, 224, 0);
+    color: black;
+}
+/* Psychic */
+.text-psychic{
+    background: rgb(255, 70, 240);
+}
+/* Ice */
+.text-ice{
+    background: rgb(50, 221, 198);
+}
+/* Dragon */
+.text-dragon{
+    background: linear-gradient(
+        to bottom,
+        rgba(38, 156, 211, 0.808) 0%,
+        rgba(38, 156, 211, 0.808) 50%,
+        rgb(238, 84, 13) 50%,
+        rgb(238, 84, 13) 100%);
+}
+/* Dark */
+.text-dark{
+    background: rgb(38, 40, 41);
+}
+/* Fairy */
+.text-fairy{
+    background: rgb(252, 138, 237);
+}
+
+

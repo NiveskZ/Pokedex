@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Pokedex</title>
+    
+    <link rel='stylesheet' href="{{ url_for('static', filename='styles/poke.css') }}">
+
+    <link href="https://getbootstrap.com/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    
+
+</head>
+<body class="text-white bg-dark">
+    <div>
+        <h3 class="float-md-start mb-0">Pokedex</h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+            <a class="nav-link active" aria-current="page" href="http://localhost:5000/">Home</a>
+        </nav>
+    </div>
+    <div>
+        <p style="text-align: center; color: red;">{{ err|safe }}</p>
+    </div>
+
+    <div class="poke-container">
+
+        <form class="row g-3">
+            <div class="col-auto">
+                <label for="InputPokemonID" class="sr-only">Pokemon ID</label>
+                <input type="text" name="pokemon" class="form-control" title="Search by the pokemon name or pokemon ID" accesskey="f" id="InputPokemonID" placeholder="Search pokemon" autocomplete="off">
+            </div>
+            <div class="col-auto">
+                <br>
+                <button type="submit" class="btn btn-primary mb-3">Search</button>
+            </div>
+        </form>
+
+        {% if poke %}
+        {% set type = poke.types[0].type.name %}
+        <div class="card" style="width: 23rem; ">
+            <img class="center" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ poke.id }}.png' height="120px" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title" style="color: black;">{{ poke.species.name|title|replace("-"," ") }}</h5>
+                <span class="badge rounded-pill bg text-{{ type }}">{{ type|title }}</span>
+                {% if poke.types[1] in poke.types%}
+                    {% set type2 = poke.types[1].type.name %}
+                <span class="badge rounded-pill bg text-{{ type2 }}">{{ type2|title }}</span>
+                {% endif %}
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Height</th>
+                        <th scope="col">Weight</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ poke.id }}</td>
+                        <td>{{ poke.height / 10 }}m</td>
+                        <td>{{ poke.weight / 10 }}kg</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Gender ratio</th>
+                        <th scope="col">Catch rate</th>
+                    </tr>
+                </thead>
+                {% if not poke_species.gender_rate == -1%}
+                    {% set gr_male = (((8 - poke_species.gender_rate) / 8)  * 100) %}
+                    {% set gr_female = ((poke_species.gender_rate / 8)  * 100)%}
+                <tbody>
+                    <tr>
+                        {% if gr_male == 0 %}
+                        <td>
+                            <div class="statbar" style="float:left;background:#FF77DD; border-radius: 20px; -moz-border-radius: 20px; -webkit-border-radius: 20px; -khtml-border-radius: 20px; -icab-border-radius: 20px; -o-border-radius: 20px; color:#000; height:10px; width:96.5%; border: 0.5px solid black; overflow: hidden;"></div>
+                        </td>
+
+                        <tr>
+                            <td>
+                                <span style="color:#FF6060;">{{ gr_female }}% female</span>
+                            </td>
+                            <td>
+                                {{ poke_species.capture_rate }}
+                            </td>
+                        </tr>
+                        {% endif %}
+
+                        {% if gr_female == 0 %}
+                        <td>
+                            <div class="statbar" style="float:left;background:#3355FF; border-radius: 20px; -moz-border-radius: 20px; -webkit-border-radius: 20px; -khtml-border-radius: 20px; -icab-border-radius: 20px; -o-border-radius: 20px; color:#FFF; height:10px; width:96.5%; border: 0.5px solid black; overflow: hidden;"></div>
+                        </td>
+                        <tr>
+                            <td>
+                                <span style="color:#0000FF;">{{ gr_male }}% male</span>
+                            </td>
+                            <td>
+                                {{ poke_species.capture_rate }}
+                            </td>
+                        </tr>
+                        {% endif %}
+
+                        {% if not gr_male == 0 and not gr_female == 0 %}
+                        <td>
+                            <div class="statbar" style="float:left;background:#3355FF; border-top-left-radius: 20px; -moz-border-radius-topleft: 20px; -webkit-border-top-left-radius: 20px; -khtml-border-top-left-radius: 20px; -icab-border-top-left-radius: 20px; -o-border-top-left-radius: 20px; border-bottom-left-radius: 20px; -moz-border-radius-bottomleft: 20px; -webkit-border-bottom-left-radius: 20px; -khtml-border-bottom-left-radius: 20px; -icab-border-bottom-left-radius: 20px; -o-border-bottom-left-radius: 20px; color:#FFF; height:10px; width:{{gr_male}}%; border: 0.5px solid black; border-right-width:0px; overflow: hidden;"></div><div class="statbar" style="float:left;background:#FF77DD; border-top-right-radius: 20px; -moz-border-radius-topright: 20px; -webkit-border-top-right-radius: 20px; -khtml-border-top-right-radius: 20px; -icab-border-top-right-radius: 20px; -o-border-top-right-radius: 20px; border-bottom-right-radius: 20px; -moz-border-radius-bottomright: 20px; -webkit-border-bottom-right-radius: 20px; -khtml-border-bottom-right-radius: 20px; -icab-border-bottom-right-radius: 20px; -o-border-bottom-right-radius: 20px; color:#000; height:10px; width:{{ gr_female }}%; border: 0.5px solid black; overflow: hidden; border-left-width:0px;"></div>
+                        </td>
+                        <tr>
+                            <td>
+                                <span style="color:#0000FF;">{{ gr_male }}% male</span>
+                                <span style="color:#000;">,</span> 
+                                <span style="color:#FF6060;">{{ gr_female }}% female</span>
+                            </td>
+                            <td>
+                                {{ poke_species.capture_rate }}
+                            </td>
+                        </tr>
+                        {% endif %}
+                {% endif %}
+                </tbody>
+
+                {% if poke_species.gender_rate == -1 %}
+                <tbody>
+                    <tr>
+                        <td>
+                            <span> Gender unknown </span>
+                        </td>
+                        <td>
+                            {{ poke_species.capture_rate }}
+                        </td>
+                    </tr>
+                </tbody>
+                {% endif %}
+
+                <table class="table" style=" text-align: center; font-size: 10px; border: 1px solid black">
+                    <thead>
+                        <tr> 
+                            <th scope="col"></th>
+                            <th scope="col">HP</th>
+                            <th scope="col">Atk</th>
+                            <th scope="col">Def</th>
+                            <th scope="col">Sp.Atk</th>
+                            <th scope="col">Sp.Def</th>
+                            <th scope="col">Speed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Base stat</th>
+                            <td>{{ poke.stats[0].base_stat }}</td>
+                            <td>{{ poke.stats[1].base_stat }}</td>
+                            <td>{{ poke.stats[2].base_stat }}</td>
+                            <td>{{ poke.stats[3].base_stat }}</td>
+                            <td>{{ poke.stats[4].base_stat }}</td>
+                            <td>{{ poke.stats[5].base_stat }}</td>
+                        </tr>
+                        <tr> 
+                            <th scope="row">EV</th>
+                            <td>{{ poke.stats[0].effort }}</td>
+                            <td>{{ poke.stats[1].effort }}</td>
+                            <td>{{ poke.stats[2].effort }}</td>
+                            <td>{{ poke.stats[3].effort }}</td>
+                            <td>{{ poke.stats[4].effort }}</td>
+                            <td>{{ poke.stats[5].effort }}</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+
+                <table class="table caption-top">
+                    <caption style="display: table-caption; text-align: center; color: black;">Abilities</caption>
+                    <tbody>
+                        <tr>
+                            <td>{{ poke.abilities[0].ability.name }}</td>
+                            {% if poke.abilities[1] %}
+                            <td>{{ poke.abilities[1].ability.name }}</td>
+                            {% endif %}
+                        </tr>
+                    </tbody>
+                </table>
+
+            </table>
+            {% if poke_species.evolves_from_species %}
+            <div class="card-body">
+                <span style="color: black;"> Evolves From: </span>
+                <a href="http://localhost:5000/pokemon?pokemon={{ poke_species.evolves_from_species.name }}" class="card-link" style="color: black;">
+                    {{ poke_species.evolves_from_species.name|title|replace("-", " ") }}
+                </a>
+
+                {% if poke_species.evolves_from_species.url[-2:-1]|int !=0 %}
+                    {% if not poke_species.evolves_from_species.url[-3:-1]|int !=0 %}
+                    <img class="center" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ poke_species.evolves_from_species.url[-2:-1] }}.png' height="120px" alt="Card image cap">
+                    {% endif %}
+                {% endif %}
+
+                
+                {% if poke_species.evolves_from_species.url[-3:-1]|int !=0 %}
+                    {% if not poke_species.evolves_from_species.url[-4:-1]|int !=0 %}
+                        <img class="center" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ poke_species.evolves_from_species.url[-3:-1] }}.png' height="120px" alt="Card image cap">
+                    {% endif %}
+                {% endif %}
+
+                {% if poke_species.evolves_from_species.url[-4:-1]|int !=0 %}
+                    <img class="center" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ poke_species.evolves_from_species.url[-4:-1] }}.png' height="120px" alt="Card image cap">
+                {% endif %}
+
+            {% endif %}
+            </div>
+            </table>
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
