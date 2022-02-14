@@ -1,6 +1,4 @@
-.poke-container{
-    text-align: center;
-}
+
 
 .bd-placeholder-img {
     font-size: 1.125rem;
@@ -15,6 +13,7 @@
         font-size: 3.5rem;
     }
 }
+
 .center{
     display: block;
     margin-left: auto;
@@ -31,8 +30,11 @@
 
 .row.g-3{
     text-align: center;
+<<<<<<< Updated upstream
     padding: 0 258px;
     width: 50%   ;
+=======
+>>>>>>> Stashed changes
     margin-left: auto;
     margin-right: auto;
 }
