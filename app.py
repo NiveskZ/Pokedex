@@ -109,8 +109,15 @@ def poke_name():
         err = err.replace("\n", "<br>")
 
     else:
-        poke = client_disk_cache.get_pokemon(global_pokedex_id)
-        poke_species = client_disk_cache.get_pokemon_species(global_pokedex_id)
+        if global_pokedex_id == 'wormadam-plant':
+            poke = client_disk_cache.get_pokemon(global_pokedex_id)
+            poke.name = 'wormadam'
+            poke_species = client_disk_cache.get_pokemon_species(poke.name)
+
+        else:
+
+            poke = client_disk_cache.get_pokemon(global_pokedex_id)
+            poke_species = client_disk_cache.get_pokemon_species(global_pokedex_id)
 
     return render_template('index.html', err=err, poke=poke, poke_species=poke_species)
 
