@@ -53,14 +53,13 @@
                 <div class="container">
             
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-4 g-4 ">
-                    {% set pokemon_total = pokemon_names | length %}
-                    {% for i in range(0,pokemon_total) %}
+                    {% for pokemon_encounter in l_area.pokemon_encounters %}
                         <div class="col">
                             <div class="card shadow-sm" style="width: 40%; padding: 5px 5px;">
-                                <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon_id_by_name[pokemon_names[i]] }}.png' alt="Card image cap">
+                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon_encounter.pokemon.url.split('/')[-2] }}.png" alt="Card image cap">
                 
                                 <div class="card-body">
-                                    <p class="card-text text-black"> {{ pokemon_names[i]|title }} </p>
+                                    <p class="card-text text-black"> {{ pokemon_encounter.pokemon.name|title }} {{ pokemon_encounter.version_details[0].max_chance }} </p>
                                     <div class="text-center">
 
                                     </div>
