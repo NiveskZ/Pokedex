@@ -12,7 +12,7 @@ def home_page():
 
 client_disk_cache = pokepy.V2Client(cache='in_disk', cache_location='./temp')
 # gets all pokemon names and put in a list
-poke_names = []
+poke_names = ['wormadam']
 for global_pokedex_id in range(1,899):
     pokemon = client_disk_cache.get_pokemon(global_pokedex_id)
     poke_names.append(pokemon.name)
@@ -53,14 +53,17 @@ def location_area():
     l_area = None
 
     # create a list that will have all pokemons in the requesting area
-    poke = []
+    pokemon_names = []
+    pokemon_id_by_name = {}
 
     # sees if the location area exists and gets all infos from it
     if global_location_area in local_area_names:
         l_area = client_disk_cache.get_location_area(global_location_area)
         
         for i in range(len(l_area.pokemon_encounters)):
-            poke.append(l_area.pokemon_encounters[i].pokemon.name)
+            pokemon_names.append(l_area.pokemon_encounters[i].pokemon.name)
+        for pokemon_name in pokemon_names:
+            pokemon_id_by_name[pokemon_name] = client_disk_cache.get_pokemon(pokemon_name).id
 
 
     # returns an error message
@@ -70,7 +73,7 @@ def location_area():
 
         return render_template('erro.html', err=err)
 
-    return render_template('location.html', l_area = l_area, poke=poke)
+    return render_template('location.html', l_area = l_area, pokemon_names=pokemon_names, pokemon_id_by_name = pokemon_id_by_name)
 
 
 @app.route('/pokemon', methods=['GET'])
@@ -78,10 +81,11 @@ def poke_name():
     
     client_disk_cache = pokepy.V2Client(cache='in_disk', cache_location='./temp')
 
-    global_pokedex_id = request.values.get('pokemon').lower()
+    global_pokedex_id = request.values.get('pokemon').lower().replace(' ','-')
 
     poke = None
     poke_species = None
+    err = ''
 
     # check if the global_pokedex_id exists
     #if not global_pokedex_id:
@@ -109,7 +113,8 @@ def poke_name():
         err = err.replace("\n", "<br>")
 
     else:
-        if global_pokedex_id == 'wormadam-plant':
+        if global_pokedex_id == 'wormadam-plant' or global_pokedex_id == 'wormadam':
+            global_pokedex_id = 'wormadam-plant'
             poke = client_disk_cache.get_pokemon(global_pokedex_id)
             poke.name = 'wormadam'
             poke_species = client_disk_cache.get_pokemon_species(poke.name)
