@@ -196,24 +196,7 @@
                 <a href="http://localhost:5000/pokemon?pokemon={{ poke_species.evolves_from_species.name }}" class="card-link" style="color: black;">
                     {{ poke_species.evolves_from_species.name|title|replace("-", " ") }}
                 </a>
-
-                {% if poke_species.evolves_from_species.url[-2:-1]|int !=0 %}
-                    {% if not poke_species.evolves_from_species.url[-3:-1]|int !=0 %}
-                    <img class="center" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ poke_species.evolves_from_species.url[-2:-1] }}.png' height="120px" alt="Card image cap">
-                    {% endif %}
-                {% endif %}
-
-                
-                {% if poke_species.evolves_from_species.url[-3:-1]|int !=0 %}
-                    {% if not poke_species.evolves_from_species.url[-4:-1]|int !=0 %}
-                        <img class="center" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ poke_species.evolves_from_species.url[-3:-1] }}.png' height="120px" alt="Card image cap">
-                    {% endif %}
-                {% endif %}
-
-                {% if poke_species.evolves_from_species.url[-4:-1]|int !=0 %}
-                    <img class="center" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ poke_species.evolves_from_species.url[-4:-1] }}.png' height="120px" alt="Card image cap">
-                {% endif %}
-
+                    <img class="center" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ poke_species.evolves_from_species.url.split('/')[-2] }}.png" height="120px" alt="Card image cap">
             {% endif %}
             </div>
             </table>

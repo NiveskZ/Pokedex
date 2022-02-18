@@ -26,17 +26,11 @@ locationData = json.loads(r.text)
 locatData = locationData['results']
 
 # get all location areas id and put the ids in a list
+#%%
 local_area_ids = []
-for i in range(0,9):
-    l_id = locatData[i]['url'][-2:-1]
+for i in range(0,702):
+    l_id = locatData[i]['url'].split('/')[-2]
     local_area_ids.append(l_id)
-for i in range(9,67):
-    l_id = locatData[i]['url'][-3:-1]
-    local_area_ids.append(l_id)
-for i in range(67,702):
-    l_id = locatData[i]['url'][-4:-1]
-    local_area_ids.append(l_id)
-
 #%%
 # get all location area names
 local_area_names = []
@@ -56,7 +50,6 @@ def location_area():
     if global_location_area in local_area_names:
         l_area = client_disk_cache.get_location_area(global_location_area)
         
-
 
     # returns an error message
     else:
