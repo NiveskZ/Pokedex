@@ -26,7 +26,6 @@
             }
         }
     </style>
-</head>
 
 <body class="d-flex h-100 text-center text-white bg-dark">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -52,17 +51,50 @@
             <div class="album py-5 bg-dark">
                 <div class="container">
             
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-4 g-4 ">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
                     {% for pokemon_encounter in l_area.pokemon_encounters %}
                         <div class="col">
-                            <div class="card shadow-sm" style="width: 40%; padding: 5px 5px;">
-                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon_encounter.pokemon.url.split('/')[-2] }}.png" alt="Card image cap">
-                
-                                <div class="card-body">
-                                    <p class="card-text text-black"> {{ pokemon_encounter.pokemon.name|title }} {{ pokemon_encounter.version_details[0].max_chance }} </p>
-                                    <div class="text-center">
+                            <div class="card shadow-sm" style="width: 100%;">
+                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ pokemon_encounter.pokemon.url.split('/')[-2] }}.png" alt="Card image cap">
 
-                                    </div>
+                                <div class="card-body">
+                                    <p class="card-text text-black"> 
+                                        {{ pokemon_encounter.pokemon.name|title }}
+                                        <table class="table" style=" color: black ; border: 1px solid black; font-family: 'Times New Roman', Times, serif; font-size: 70%; border-width: 0px;" >
+
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Version</th>
+                                                    <th scope="col">Method</th>
+                                                    <th scope="col">Chance </th>
+                                                    <th scope="col">Min-Max level</th>
+                                                    <th scope="col">Condition values </th>
+                                                </tr>
+                                            </thead>
+                                            {% for version_detail in pokemon_encounter.version_details %}
+
+                                                {% for encounter_detail in version_detail.encounter_details %}
+
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>{{ version_detail.version.name }}</td>
+                                                            <td>{{ encounter_detail.method.name }}</td>
+                                                            <td>{{ encounter_detail.chance }}</td>
+                                                            <td>{{ encounter_detail.min_level}} - {{ encounter_detail.max_level }}</td>
+
+                                                            {% for condition_value in encounter_detail.condition_values%}
+
+                                                                <td>{{ condition_value.name }}</td>
+
+                                                            {% endfor %}
+
+                                                        </tr>
+                                                    </tbody>
+                                                    
+                                                
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </table>
                                 </div>
                             </div>
                         </div>
