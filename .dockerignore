@@ -1,0 +1,6 @@
+./venv/
+temp/
+Makefile
+Dockerfile
+__pycache__/
+.vscode/
