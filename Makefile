@@ -16,3 +16,7 @@ docker-run: docker-build
 
 docker-debug: docker-build
 	docker run -it --rm $(IMAGE_TAG) sh
+
+docker-background: docker-build
+	docker run --restart=unless-stopped -d -p 80:80 $(IMAGE_TAG) 
+
