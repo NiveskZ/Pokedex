@@ -12,11 +12,11 @@ docker-build:
 	docker build -t $(IMAGE_TAG) .
 
 docker-run: docker-build
-	docker run -it --rm -p 80:80 $(IMAGE_TAG) 
+	docker run -it --rm -p 8080:80 $(IMAGE_TAG) 
 
 docker-debug: docker-build
 	docker run -it --rm $(IMAGE_TAG) sh
 
 docker-background: docker-build
-	docker run --restart=unless-stopped -d -p 80:80 $(IMAGE_TAG) 
+	docker run --restart=unless-stopped -d -p 8080:80 $(IMAGE_TAG) 
 
